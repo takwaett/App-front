@@ -1,0 +1,95 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.login-container {
+ min-height: 100vh; /* Prend toute la hauteur de l'écran */
+  min-width: 100vw;      /* Prend toute la largeur de l'écran */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ffffff, #008000); /* Votre dégradé */
+  font-family: Arial, sans-serif;   
+}
+/* Carte login */
+.login-form {
+    background: white;
+    padding: 30px;
+    border-radius: 14px;
+   width :400px;
+    
+}
+/* Logo + titre */
+.logo-plateforme {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo-plateforme img {
+    width: 80px;
+    height: 80px;
+}
+
+.logo-platefrome h2 {
+    font-size: 16px;
+    margin-top: 5px;
+}
+ .slogan {
+    font-size: 12px;       
+    color: black;          
+    margin-top: 5px;
+    font-weight:  Bold;
+    font-family: Arial;
+    text-align: center;  
+}
+/* Inputs */
+.labels {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.labels label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.labels input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.3s;
+}
+
+.labels input:focus {
+    border-color: #4facfe;
+}
+/* Bouton */
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: green;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.login-btn:hover {
+    background: rgb(1, 42, 1);
+}
+/* Liens */
+.links {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+}
+.links a {
+    color: green;
+    text-decoration: none;
+}
+.links a:hover {
+    text-decoration: underline;
+}
