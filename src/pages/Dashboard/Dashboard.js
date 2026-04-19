@@ -4,14 +4,14 @@ import './Dashboard.css';
 import Navbar from '../../components/Layout/Navbar/Navbar';
 import Sidebar from '../../components/Layout/Sidebar/Sidebar';
 import Body from '../../components/Layout/Body/Body';
-import { getUserProfile } from '../../services/authService';
+import { getUserProfile } from '../../api/auth';
 
 function Dashboard() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [user, setUser] = useState(null); 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const [loading, setLoading] = useState(true); // Ajout d'un état de chargement
+  const [loading, setLoading] = useState(true);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
@@ -19,25 +19,21 @@ function Dashboard() {
     const loadProfile = async () => {
       try {
         const data = await getUserProfile();
-        // Si le service renvoie des données valides
         if (data) {
           setUser(data);
         } else {
-          // Si pas de données (ex: token invalide), retour login
-          navigate('/login');
+          navigate('/Signin'); // Redirection si pas de profil
         }
       } catch (err) {
         console.error("Erreur d'accès au dashboard", err);
-        navigate('/login');
+        navigate('/Signin');
       } finally {
-        setLoading(false); // On arrête le chargement quoi qu'il arrive
+        setLoading(false);
       }
     };
     loadProfile();
   }, [navigate]);
 
-  // Si on est encore en train de récupérer les données, on n'affiche rien ou un spinner
-  // Cela évite de voir "Bienvenue undefined" pendant une demi-seconde
   if (loading) {
     return <div className="loading-screen">Chargement du profil...</div>;
   }

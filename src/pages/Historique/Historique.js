@@ -3,20 +3,19 @@ import Sidebar from '../../components/Layout/Sidebar/Sidebar';
 import Navbar from '../../components/Layout/Navbar/Navbar';
 import './Historique.css';
 
-function Historique() {
+function Historique({ userName }) { 
   const [date, setDate] = useState("");
   const [capteur, setCapteur] = useState("all");
   const [noeud, setNoeud] = useState("all");
   const [filteredData, setFilteredData] = useState([]);
 
-  // État pour la Sidebar
+  
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
 
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
   };
-
-  // Données simulées
+  
   const allData = [
     { date: '2026-03-27 12:00', temp: 24.5, hum: 58, air: 42, press: 669, capteur: 'DHT22', noeud: 'Node1' },
     { date: '2026-03-27 11:45', temp: 24.2, hum: 59, air: 40, press: 670, capteur: 'DHT22', noeud: 'Node2' },
@@ -48,7 +47,6 @@ function Historique() {
         <Sidebar />
       </div>
 
-      {/* 2. ZONE PRINCIPALE */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
         
         {/* NAVBAR avec contrôle de la sidebar */}

@@ -1,10 +1,7 @@
 import { useState } from 'react';
-import {Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import mdp from '../../assets/mdp.png';
 import './ForgetPassword.css';
-import { requestPasswordReset, resetPassword } from '../../services/authService';
-
-
 
 function ForgetPassword() {
     const navigate = useNavigate();
@@ -12,30 +9,16 @@ function ForgetPassword() {
     const [code, setCode] = useState('');
     const [nouveaumotdePasse, setnouveaumotdepasse] = useState('');
 
-   
-    
+    const handleSendCode = (e) => {
+        e.preventDefault();
+        console.log("Envoi du code à:", email);
+    };
 
-  const handleSendCode = async () => {
-    if (!email) return alert("Veuillez saisir un email.");
-    try {
-        await requestPasswordReset(email); // Appel au backend
-        alert("Si cet email existe, un code vient d'être envoyé !");
-    } catch (error) {
-        alert("Erreur lors de l'envoi du code.");
-    }
-};
-
-const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-        await resetPassword(email, code, nouveaumotdePasse); // Appel au backend
-        alert("Mot de passe réinitialisé avec succès !");
-        navigate('/login');
-    } catch (error) {
-        alert("Code invalide ou expiré.");
-    }
-};
-    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("Réinitialisation pour:", email);
+        navigate('/Signin');
+    };
 
     return (
         <div className="page-background">
@@ -85,13 +68,10 @@ const handleSubmit = async (e) => {
 
                     <button type="submit" className="btn-primary">Confirmer le nouveau mot de passe</button>
                     
-                    <Link to="/login" className="retour">Retour à la page de connexion</Link>
-                   
+                    <Link to="/Signin" className="retour">Retour à la page de connexion</Link>
                 </form>
-               </div>
-               
             </div>
-        
+        </div>
     );
 }
 

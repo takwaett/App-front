@@ -3,39 +3,35 @@ import logo from '../../assets/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
 import './signin.css';
 // 1. IMPORTATION DU SERVICE
-import { login } from '../../services/authService'; 
+import { login } from '../../api/auth'; 
 
-function Login() {
+function Login({ setUserName }) { 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-
-    // 2. RENDRE LA FONCTION ASYNCHRONE
-    const handleSubmit = async (e) => {
+    
+    const handleSignin = async (e) => {
         e.preventDefault();
-
         try {
-            // 3. APPEL AU BACKEND
             const data = await login(email, password);
-
-            // 4. VÉRIFICATION DU TOKEN
             if (data && data.access_token) {
-                console.log('Connexion réussie !');
-                // ON NE NAVIGUE QUE SI LE SERVEUR A DIT OK
+                // 1. On met à jour le nom global AVANT de changer de page
+                // Vérifie si ton backend renvoie 'user.nom' ou 'user.username'
+                if (data.user) {
+                    setUserName(data.user.nom); 
+                }
+                
+                // 2. On change de page
                 navigate('/dashboard');
             }
         } catch (error) {
-            // 5. GESTION DE L'ERREUR (MOT DE PASSE FAUX)
-            console.error('Erreur de connexion:', error);
             alert("Email ou mot de passe incorrect !");
-            // Optionnel : effacer le mot de passe pour recommencer
-            setPassword('');
         }
     };
 
     return (
         <div className="login-container">
-            <form className="login-form" onSubmit={handleSubmit}>
+            <form className="login-form" onSubmit={handleSignin}>
                 <div className="logo-plateforme">
                     <img src={logo} alt="Logo Plateforme" />
                     <h2>EnviroSense</h2>
@@ -73,6 +69,6 @@ function Login() {
             </form>
         </div>
     );
-}
+} // Accolade de fin de fonction Login remise ici
 
 export default Login;
